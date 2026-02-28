@@ -6,3 +6,7 @@ theme = 'nostyleplease'
 [markup]
 [markup.highlight]
 style = 'solarized-dark'
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
