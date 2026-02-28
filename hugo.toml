@@ -2,6 +2,7 @@ baseURL = 'https://somnathdas.github.io/'
 languageCode = 'en-us'
 title = "Somnath Das"
 theme = 'nostyleplease'
+enableRobotsTXT = true
 
 [markup]
 [markup.highlight]
@@ -10,3 +11,6 @@ style = 'solarized-dark'
 [caches]
   [caches.images]
     dir = ':cacheDir/images'
+
+[params]
+  favicon = "/favicon.ico"

@@ -24,7 +24,7 @@ list = "never"
 - 06-05-2024 // Passed Certified Red Team Analyst ([CRTA](https://www.credential.net/ed40475c-bb7c-4a72-9a5c-9ed2b2d5c33f)) Exam.
 - 14-03-2024 // HTB Cyber Apocalypse CTF 2024 @ T.U.S.K - Ranked 113th.
 - 24-12-2023 // HTB Open Beta Season III - Ranked 311/6939.
-- 28-10-2023 // My first CTF - Synk's Fetch The Flag @ Team0x0A ([CTFtime.org](https://ctftime.org/team/192196))</a> - Ranked 40/1944.
+- 28-10-2023 // My first CTF - Synk's Fetch The Flag @ Team0x0A ([CTFtime.org](https://ctftime.org/team/192196)) - Ranked 40/1944.
 
 ## certificates
 
