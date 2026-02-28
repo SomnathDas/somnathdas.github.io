@@ -13,4 +13,5 @@ style = 'solarized-dark'
     dir = ':cacheDir/images'
 
 [params]
+  description = "A blog about whatever I learn about when I poke around computers."
   favicon = "/favicon.ico"
