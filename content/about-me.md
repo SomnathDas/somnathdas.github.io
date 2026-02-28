@@ -2,6 +2,7 @@
 date = '2026-02-28T23:28:08+05:30'
 draft = false
 title = 'About Me'
+description = 'Say a few words about myself? Whatever man...'
 
 [build]
 list = "never"

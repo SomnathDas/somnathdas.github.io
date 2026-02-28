@@ -15,3 +15,4 @@ style = 'solarized-dark'
 [params]
   description = "A blog about whatever I learn about when I poke around computers."
   favicon = "/favicon.ico"
+  images = ["/images/default-banner.png"]
