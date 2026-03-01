@@ -25,11 +25,6 @@
     background: $--bg-color;
   }
 
-  code:not(pre > code) {
-    background-color: $--primary-text-color;
-    color: $--bg-color;
-  }
-
   *:target {
     background: $--highlight;
     color: $--primary-text-color;
@@ -49,6 +44,7 @@
   }
 }
 
+/* Alt : #000e14 */
 @mixin dark-appearance {
   @include theme(#001115, #b3eab7, #000000, #c0ff00, #c0ff00, #2f3849); // modus-vivendi
 }
@@ -104,7 +100,7 @@ hr {
 pre {
   margin: 3em 0;
   padding: 1em;
-  overflow-x: auto; /* Fix pre content overflowing parent without scroll bar */
+  overflow-x: auto;
 }
 
 pre, code {
@@ -123,11 +119,15 @@ code {
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+
+  font-size: 14px;
 }
 
 code:not(pre > code) {
   padding: 0.1em 0.2em;
   font-size: 90%;
+  background-color: #0d4b21;
+  color: white;
 }
 
 code.has-jax {

@@ -39,7 +39,7 @@ Refer to _Fig 1.1_ below to get an overview of this. Let’s go through each of 
 1.  `main.c` is a source file that we write in `C` programming language. It can be an impure `C` file if it contains `pre-processor` `directives` .
 2.  `main.i` is a pure `C` file that is the result of `pre-processing` step which is done by `cpp` program. It resolves all `pre-processor` `directives` such as `#include` and `#define` .
 3.  `main.s` is a processor-specific and human-readable `assembly code` file that is the result of `compilation` step which is done by `gcc` program.
-4.  `main.o` is an `ELF` `relocatable` file produced as a result of `assembly` step which is done by `as ` program. It contains `machine code` but is not ready to be executed yet.  
+4.  `main.o` is an `ELF` `relocatable` file produced as a result of `assembly` step which is done by `as` program. It contains `machine code` but is not ready to be executed yet.  
     — “Relocatable” means that `instructions` inside the file is not meant to hold any assumption about memory location of `functions` used in the program code.   
      — One way to achieve this functionality is by leaving `symbolic references` in the file.  
      — These `references` must be resolved during the `Linking` phase or the `Loading` phase by the `Linker` or the `Loader` respectively.
