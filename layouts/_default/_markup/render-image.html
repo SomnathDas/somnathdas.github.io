@@ -26,7 +26,7 @@
       {{- $large := $image.Resize "1600x webp q95" -}}
 
       <img 
-        loading="lazy" 
+        loading="eager" 
         decoding="async"
         src="{{ $medium.RelPermalink }}" 
         alt="{{ .Text }}"
@@ -39,7 +39,7 @@
         sizes="(max-width: 600px) 500px, (max-width: 1200px) 800px, 1200px"
         width="{{ $image.Width }}" 
         height="{{ $image.Height }}"
-        style="max-width: 100%; height: auto;"
+        style="max-width: 100%; height: auto; border-radius: 2px;"
       >
     {{- end -}}
 
