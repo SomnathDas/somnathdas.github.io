@@ -44,8 +44,6 @@
     padding: 1rem;
   }
 
-  figcaption { color: $--secondary-text-color; }
-
   blockquote {
     border: thin solid $--primary-text-color;
   }
@@ -104,6 +102,7 @@ hr {
 }
 
 pre {
+  margin: 3em 0;
   padding: 1em;
   overflow-x: auto; /* Fix pre content overflowing parent without scroll bar */
 }
@@ -153,6 +152,8 @@ img {
 figcaption {
   text-align: center;
   opacity: 0.5;
+  font-size: 0.9em;
+  margin-top: 0.5em;
 }
 
 details {
@@ -182,4 +183,13 @@ details[open] summary {
 
 .toc {
   padding: 1rem;
+}
+
+figure {
+  text-align: center;
+  margin: 3em 0;
+}
+
+#TableOfContents > ul {
+  list-style: none;
 }

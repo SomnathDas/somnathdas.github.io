@@ -16,3 +16,8 @@ style = 'solarized-dark'
   description = "A blog about whatever I learn about when I poke around computers."
   favicon = "/favicon.ico"
   images = ["/images/default-banner.png"]
+
+[imaging]
+  quality = 90 
+  resampleFilter = "lanczos" 
+  exif = { disableDate = false, disableLatLong = true, excludeFields = ".*" }

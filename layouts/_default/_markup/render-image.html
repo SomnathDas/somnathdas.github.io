@@ -1,0 +1,62 @@
+{{- $image := .Page.Resources.GetMatch .Destination -}}
+<figure>
+  {{- if $image -}}
+    
+    {{- /* Check if the image is a GIF or SVG */ -}}
+    {{- if or (eq $image.MediaType.SubType "gif") (eq $image.MediaType.SubType "svg") -}}
+      
+      {{- /* Render GIFs and SVGs directly without WebP conversion */ -}}
+      <img 
+        loading="lazy" 
+        decoding="async"
+        src="{{ $image.RelPermalink }}" 
+        alt="{{ .Text }}"
+        {{ with .Title }} title="{{ . }}" {{ end }}
+        width="{{ $image.Width }}" 
+        height="{{ $image.Height }}"
+        style="max-width: 100%; height: auto;"
+      >
+
+    {{- else -}}
+      
+      {{- /* Standard resizing for JPGs and PNGs */ -}}
+      {{- $tiny := $image.Resize "500x webp q95" -}}
+      {{- $small := $image.Resize "800x webp q95" -}}
+      {{- $medium := $image.Resize "1200x webp q95" -}}
+      {{- $large := $image.Resize "1600x webp q95" -}}
+
+      <img 
+        loading="lazy" 
+        decoding="async"
+        src="{{ $medium.RelPermalink }}" 
+        alt="{{ .Text }}"
+        {{ with .Title }} title="{{ . }}" {{ end }}
+        srcset="
+          {{ $tiny.RelPermalink }} 500w,
+          {{ $small.RelPermalink }} 800w,
+          {{ $medium.RelPermalink }} 1200w,
+          {{ $large.RelPermalink }} 1600w"
+        sizes="(max-width: 600px) 500px, (max-width: 1200px) 800px, 1200px"
+        width="{{ $image.Width }}" 
+        height="{{ $image.Height }}"
+        style="max-width: 100%; height: auto;"
+      >
+    {{- end -}}
+
+  {{- else -}}
+    {{- /* Fallback for external URLs or static folder images */ -}}
+    <img 
+      src="{{ .Destination | safeURL }}" 
+      alt="{{ .Text }}" 
+      {{ with .Title }} title="{{ . }}" {{ end }}
+      style="max-width: 100%; height: auto;"
+    >
+  {{- end -}}
+
+  {{- /* The Caption: Prioritize Title, fallback to Alt Text */ -}}
+  {{- if or .Text .Title -}}
+    <figcaption>
+      {{ with .Title }}{{ . }}{{ else }}{{ .Text }}{{ end }}
+    </figcaption>
+  {{- end -}}
+</figure>
