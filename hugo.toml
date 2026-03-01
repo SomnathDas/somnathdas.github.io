@@ -18,6 +18,6 @@ style = 'solarized-dark'
   images = ["/images/default-banner.png"]
 
 [imaging]
-  quality = 90 
+  quality = 95
   resampleFilter = "lanczos" 
   exif = { disableDate = false, disableLatLong = true, excludeFields = ".*" }
