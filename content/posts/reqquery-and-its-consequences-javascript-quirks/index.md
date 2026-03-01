@@ -3,6 +3,7 @@ title: "req.query and its consequences — Javascript Quirks"
 date: 2024-07-03T15:02:31.856Z
 draft: false
 slug: "reqquery-and-its-consequences-javascript-quirks"
+description: "req.query and its consequences — Javascript Quirks This article covers a few anomalies while parsing query in Express.js and how Javascript operate with different data-types that I encountered..."
 toc: true
 tocBorder: true
 images:

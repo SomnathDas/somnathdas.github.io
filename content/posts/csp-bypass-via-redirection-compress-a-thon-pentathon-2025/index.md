@@ -3,6 +3,7 @@ title: "CSP Bypass via Redirection — Compress-a-thon — Pentathon 2025"
 date: 2025-05-07T15:18:33.758Z
 draft: false
 slug: "csp-bypass-via-redirection-compress-a-thon-pentathon-2025"
+description: "CSP Bypass via Redirection — Compress-a-thon — Pentathon 2025 Compress-a-thon is a \"web exploitation\" challenge that was featured in Pentathon 2025 Finale Jeopardy CTF Round. This challenge..."
 toc: true
 tocBorder: true
 images:

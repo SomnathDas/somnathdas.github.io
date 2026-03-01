@@ -3,6 +3,7 @@ title: "From Format String to Building a ROP chain ft. musl libc — niteCTF
 date: 2025-12-15T20:07:09.536Z
 draft: false
 slug: "from-format-string-to-building-a-rop-chain-ft-musl-libc-nitectf-2025"
+description: "From Format String to Building a ROP chain ft. musl libc — niteCTF 2025 beating_yellow_king_with_musl_in_ng+ is a binary exploitation challenge. From Off-by-one to read/write primitive via Format..."
 toc: true
 tocBorder: true
 images:

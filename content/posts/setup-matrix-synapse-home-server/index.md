@@ -3,6 +3,7 @@ title: "Setup Matrix Synapse Home-server"
 date: 2023-06-18T09:16:10.551Z
 draft: false
 slug: "setup-matrix-synapse-home-server"
+description: "Setup Matrix Synapse Home-server Matrix.org community have dedicated themselves to build a platform for communication in a truly \"end-to-end encrypted\" manner. I believe you are here to quickly..."
 toc: true
 tocBorder: true
 images:

@@ -9,6 +9,14 @@
         </aside>
     {{ end }}
 
+    {{ with .Site.GetPage "page" "header" }}
+        <div class="post-header-md">{{ .Content }}</div>
+    {{ end }}
+
     {{ .Content }}
+
+    {{ with .Site.GetPage "page" "footer" }}
+        <div class="post-footer-md">{{ .Content }}</div>
+    {{ end }}
 </article>
 {{ end }}

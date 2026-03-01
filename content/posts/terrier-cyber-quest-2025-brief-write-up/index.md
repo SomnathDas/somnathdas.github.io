@@ -3,6 +3,7 @@ title: "Terrier Cyber Quest 2025 — Brief Write-up"
 date: 2025-09-25T18:59:09.327Z
 draft: false
 slug: "terrier-cyber-quest-2025-brief-write-up"
+description: "Terrier Cyber Quest 2025 — Brief Write-up Quick but complete walk-through for the Boot2Root CTF hosted during Cyber Quest 2025. Initial Access Ran an nmap scan — sudo nmap -sC 192.168.57.24 -A -v..."
 toc: true
 tocBorder: true
 images:

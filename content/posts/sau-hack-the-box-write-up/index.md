@@ -3,6 +3,7 @@ title: "Sau — Hack The Box — Write-up"
 date: 2023-08-01T13:39:44.557Z
 draft: false
 slug: "sau-hack-the-box-write-up"
+description: "A quick but comprehensive write-up for Sau — Hack The Box machine. Covering Enumeration, Exploitation and Privilege Escalation and batteries included."
 toc: true
 tocBorder: true
 images:

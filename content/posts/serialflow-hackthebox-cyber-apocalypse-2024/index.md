@@ -3,6 +3,7 @@ title: "SerialFlow — HackTheBox — Cyber Apocalypse 2024"
 date: 2024-03-14T16:59:35.591Z
 draft: false
 slug: "serialflow-hackthebox-cyber-apocalypse-2024"
+description: "SerialFlow — HackTheBox — Cyber Apocalypse 2024 SerialFlow is a “web exploitation” challenge that was featured in HTB’s Cyber Apocalypse 2024 CTF. Source-Code Review Let’s start with..."
 toc: true
 tocBorder: true
 images:

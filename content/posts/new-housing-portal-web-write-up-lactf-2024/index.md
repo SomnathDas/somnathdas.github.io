@@ -3,6 +3,7 @@ title: "new-housing-portal(web) - write-up - LACTF-2024"
 date: 2024-02-19T17:09:33.189Z
 draft: false
 slug: "new-housing-portal-web-write-up-lactf-2024"
+description: "new-housing-portal (web)-write-up— LACTF-2024 A write-up on “new-housing-portal” by r2uwu2 challenge featured in LACTF-2024 in the category of “web”. We begin by statically analyzing the..."
 toc: true
 tocBorder: true
 images:
