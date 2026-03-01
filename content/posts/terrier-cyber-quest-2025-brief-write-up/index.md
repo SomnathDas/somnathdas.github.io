@@ -13,7 +13,7 @@ Quick but complete walk-through for the Boot2Root CTF hosted during Cyber Quest 
 
 ![Featured Image.](image-1.png)
 
-### Initial Access
+## Initial Access
 
 Ran an `nmap` scan —
 
@@ -82,7 +82,7 @@ Also, we observe that we have more users apart from `root` -
 
 ![cat /etc/passwd](image-13.png)
 
-### Privilege Escalation — Stage 1
+## Privilege Escalation — Stage 1
 
 We obtained `shell` to `flower` using `ssh` —
 
@@ -156,7 +156,7 @@ Obtained the third flag `FLAG -> Y0u_kn0w_i5_th15_RaC3` —
 
 ![Showing contents of the F14@_thr33.txt file.](image-19.png)
 
-### Privilege Escalation — Stage 2
+## Privilege Escalation — Stage 2
 
 From recon we also found out that `/bin/` contained a binary that runs as `stem` and `leaf` user is allowed to execute it.
 
@@ -198,7 +198,7 @@ Thus the 4th flag `FLAG -> PwN_2_0wN_N0w_Y0u_ar3_5t3M`—
 
 ![Listening files and printing the contents of F14@_f0ur.txt file.](image-29.png)
 
-### Privilege Escalation — Stage 3
+## Privilege Escalation — Stage 3
 
 Doing recon we found another binary called `final` —
 
@@ -286,6 +286,6 @@ Once you run `python3 final_pwn.py` script and boom we obtained our final flag�
 
 ![“root” user shell obtained by exploiting suid binary “./final”.](image-35.png)
 
-### Afterwords
+## Afterwords
 
 😸 Thank you for reading this brief write-up. I’d like to post a longer one for the last challenge about binary exploitation if I am in mood. Let me know if you have any questions. Happy hacking💖.

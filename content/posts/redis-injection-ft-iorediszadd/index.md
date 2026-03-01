@@ -19,7 +19,7 @@ This article covers the Redis-injection in a challenge of _corCTF 2024_ where in
 
 It is always a good idea to start working on a challenge by taking a high-level overview of the application. We should go ahead and interact with the application, capture various requests and responses for our web-proxy and essentially understand how it works from a user’s point of view.
 
-### Overview of the application
+## Overview of the application
 
 The following events we have observed ::
 
@@ -42,7 +42,7 @@ The following events we have observed ::
 
 Once we have the basic overview of application and we also understand it’s flow. It’s time to analyze the provided `source-code` .
 
-### Digging into the source
+## Digging into the source
 
 One should start by taking a look at `package.json` or something similar to figure out the `version` of various `libraries` that is being used by an application to see if any `vulnerability` is publicly-known or is being discussed upon. As of writing this article, I am not aware of any such publicly-known `vulnerability` .
 
@@ -183,7 +183,7 @@ app.get("/flag", async (req, res) => {
 *   It retrieves score from `scoreboard` key using `redis.zscore(...)` and stores it into `score` constant.
 *   It then checks if retrieved `score` exists and if it does then is it `greater than` “1336”. If it is then it returns the `flag` and if it is not then it continues and returns the message “You gotta beat Fizz!”.
 
-### Pitfalls
+## Pitfalls
 
 *   One might be tempted to set their `username` to `FizzBuzz101` and then try to `increment` their score.
 *   It does not work because of the application’s way of handling `game` session and setting `score` .
@@ -219,7 +219,7 @@ await redis.zadd("scoreboard", score, username);
 *   We can set ourselves to become `FizzBuzz101` user and have ourselves the score of `1336` but we need a `score` that is `greater than 1336` and to `increment` it we need to increment `FizzBuzz101` ‘s `game` session score which is only temporary and in the `scoreboard` , only the final score is set once we “lose” and that score is derived from `game` key’s value.
 *   `Score` set in `scoreboard` is the final state of a user’s `game` session and therefore it cannot be `incremented` once a `game` session is over and any attempt to do so will only `overwrite` their previous `scoreboard` value.
 
-### Research and Vulnerability
+## Research and Vulnerability
 
 A very common mantra that is recited during `web` `pentesting` is ::
 
@@ -276,7 +276,7 @@ redis.zrange("sortedSet", 0, 2, "WITHSCORES").then((elements) => {
 *   So, we know that `redis.zadd(...)` is used to add our `score`, `username` as members for `key` called `scoreboard` in our `target` application. Thus, having the ability of adding “more than one” member i.e “multiple members” can potentially allow us to “add our own values” given that our `input` goes properly into the method’s `argument` without any _validation._
 *   `Third` use of `username` input tells us that the `username` from our `jwt` `token` is being used to fetch for `score` .
 
-### Exploitation
+## Exploitation
 
 *   Now, our goal becomes to add “extra members”. From what we have learnt so far, the flow of using `redis.zadd(...)` goes like `redis.zadd("scoreboard", score, username)` and we control `username` , so if we put more than one `value` in `username` then we will be able to add our own “members”.
 *   It will be like `[score1, username1, score2, username2]` . Thus, providing an `array` as our `username` seems sensible in this case. Let’s debug and take a look at how our various inputs behave ::
@@ -327,7 +327,7 @@ _Note :: The above was a mistake which I made in a hurry and spend stupidly lon
 corctf{lizard_spock!_a8cd3ad8ee2cde42}
 ```
 
-### Remediation
+## Remediation
 
 *   Validate the input you are expecting.
 *   Here, one can use [https://www.npmjs.com/package/yup](https://www.npmjs.com/package/yup "https://www.npmjs.com/package/yup") for Object-Schema validation.

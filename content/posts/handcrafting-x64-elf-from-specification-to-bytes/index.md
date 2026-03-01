@@ -11,7 +11,7 @@ images:
 ---
 ![Thumbnail for Handcrafting x64 ELF — A Brief Look article](image-1.png)
 
-### Introduction
+## Introduction
 
 Let’s start by asking a question, _“How do I make a program without using a compiler?”._ Now if you ask _“why?”_, I’d try to give you plenty of reasons along the way but I assume you are here either because _“you have to”_ or _“you want to”_.
 
@@ -19,7 +19,7 @@ We will go through _“Compilation Process”_, _“ELF Specification”_, _“E
 
 You might say, _“All that for a simple hello-world program?”_, I’d say _“Take the red pill and start peeling away the layers of abstraction”_.
 
-### Compilation Process
+## Compilation Process
 
 Often when the conversation begins about _“Compilation”_ or _“Compilers”_ they abruptly ends at _“Compiler is a program that takes your source code and converts it to machine code that is executed by the computer”_. Let’s try to dig a bit deeper into this idea.
 
@@ -91,7 +91,7 @@ gdb main
 
 At the end of this process what we get is called an `ELF` `Executable` file, a program that can run on our computers.
 
-### ELF Specification in Brief
+## ELF Specification in Brief
 
 Let’s try to gain sufficient understanding about how this _ELF_ or _Executable and Linkable Format_ is supposed to be written in-order for it to be _executed_ or ran by the operating system.
 
@@ -109,7 +109,7 @@ Since we are currently interested in making a simple `Executable`, we can ignore
 
 Here `Segments` have no specified order. Only the `ELF File header` has a fixed position in the file. `Loader` will use `ELF Header` to get an overview of the file and parse all other information about our `executable`.
 
-#### Overview of Key Terms
+### Overview of Key Terms
 
 *   A **_section header table_** contains information describing the file’s `sections`. Every `section` has an entry in the table; each entry gives information such as the `section` `name`, the `section` `size`, and so on.
 *   Files used during `linking` must have a **_section header table_** ; other  
@@ -121,7 +121,7 @@ Here `Segments` have no specified order. Only the `ELF File header` has a fixed 
 
 ![Fig 2.A Program Header (Segment) & Section Header (Section)](image-5.png)
 
-#### ELF File Header
+### ELF File Header
 
 > An ELF header resides at the beginning and holds a ‘‘road map’’ describing the file’s organization.
 
@@ -195,7 +195,7 @@ Here `Segments` have no specified order. Only the `ELF File header` has a fixed 
 
 ![Fig 2.7 Bytes to be written for e_shentsize, e_shnum, e_shstrndx parts of ELF File Header](image-11.png)
 
-#### Program Header Table
+### Program Header Table
 
 > A program header table, if present, tells the system how to create a process image.
 
@@ -260,14 +260,14 @@ Next component in our recipe for `ELF Executable` would be the contents of _“C
 
 Human-readable _assembly_ is essentially **mnemonics** for machine code (_binary instructions_) and we write it like any other language that is in “text” which is not really a cup of tea for our CPU to directly process and thus, we need to encode “written assembly” back to _binary instructions_. Thankfully, we have `hexadecimal` system to work with instead of `base-2` `1s` and `0s` to not make the process an eyesore to witness.
 
-### Encoding x86-64 Assembly
+## Encoding x86-64 Assembly
 
 As I mentioned in the _Introduction_ part, our program is going to be a simple one that will write _“Hello, Mom!”_ to the console.
 
 For this part, please go through the relevant sections for the following reference/s.  
  — \[1\] [General Purpose and System Instructions, AMD64 Architecture Programmer’s Manual](https://www.amd.com/content/dam/amd/en/documents/processor-tech-docs/programmer-references/24594.pdf) **_—_ For \[1\], kindly refer to Unit2_, Unit 3_ and _Unit 4_.**
 
-#### Calling `write()` system-call
+### Calling `write()` system-call
 
 ```s
 mov rax, 0x01;
@@ -285,7 +285,7 @@ syscall;
 
 ![https://www.chromium.org/chromium-os/developer-library/reference/linux-constants/syscalls/#x86_64-64-bit](image-16.png)
 
-#### Calling `exit()` system-call
+### Calling `exit()` system-call
 
 ```s
 mov rax, 0x3c;
@@ -328,7 +328,7 @@ Now that we have the _assembly code_ ready. Let’s start by going through how _
      — It is an immediate value. For example, `0x1337` or `0xcafebabe` .  
      — It is encoded in `8-bit` , `16-bit` , `32-bit` , `64-bit` forms.
 
-#### Mod R/M and REX
+### Mod R/M and REX
 
 ![Fig 3.2 Overview of ModR/M Byte](image-19.png)
 
@@ -436,11 +436,11 @@ Speaking of contents for `data section` , it will simply be a string
 
 Let’s start writing out bytes according to the _specification_ we studied before and put an end to this madness.
 
-### Raw Bytes to ELF Executable
+## Raw Bytes to ELF Executable
 
 In short, we need to write the `ELF File Header` that will direct our `Loader` to everywhere else in our program file. Along with that we need `Program Headers` to describe `segments` that will specify how and where one or more `section/s` are loaded in the `virtual memory` . Finally we will have `code section` that will simply be a `section` with `instructions` that `CPU` will execute and `data section` with our message `string` . This wraps up an overview of our simple `ELF` `Executable` .
 
-#### Bytes for ELF File Header
+### Bytes for ELF File Header
 
 *   `e_ident`   
      — Bytes \[0x00 to 0x03\] are known as `magic bytes` and in `files` it is used to identify unique type or format of a given file. For `ELF` file, it is `0x7F 0x45 0x4C 0x46` .  
@@ -499,7 +499,7 @@ In short, we need to write the `ELF File Header` that will direct our `Loader` t
 
 Now that concludes our `ELF File Header` but **remember,** `e_entry` **and** `e_phoff` **is yet to be determined.**
 
-#### Bytes for Program Headers
+### Bytes for Program Headers
 
 *   Our first `Program Header` will be for `Code Section` .
 *   `p_type` + `p_flags`   
@@ -539,12 +539,12 @@ In our `Program Header (for Code Section)` we have permissions set to `READABLE 
 
 ![Fig 4.13 Bytes for Program Headers (for Code Section and for Data Section)](image-41.png)
 
-#### Bytes for Data Section
+### Bytes for Data Section
 
 *   Our message is `Hello, Mom!` i.e of `0xC` bytes in size including `\x00` .
 *   `Hex` encode the `ASCII` string and we will get `4865 6c6c 6f2c 204d 6f6d 2100` and that is our content for `Data section` which will be apended after the `Code Section` .
 
-#### Bytes for Code Section
+### Bytes for Code Section
 
 *   Since, we’ve written all `Program Headers` , it is safe to say that `e_phoff` **for** `code section` **is equals to** `0x40` **i.e Beginning of our** `Program Headers` **in the file.**
 *   With the help of our _diagram or bytes we’ve written up till now,_ we can determine that our `Code Section` will now start from `0xb0` file `offset` and therefore our `p_offset` **for** `code section` **will be** `0xb0` .
@@ -560,7 +560,7 @@ In our `Program Header (for Code Section)` we have permissions set to `READABLE 
 
 ![Fig 4.13 Bytes for ELF Executable (ELF File Headers, Program Headers, Code Section and Data Section)](image-43.png)
 
-#### Echo the bytes
+### Echo the bytes
 
 ```sh
 echo -ne "\x7f\x45\x4c\x46\x02\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x02\x00\x3e\x00\x01\x00\x00\x00\xb0\x00\x40\x00\x00\x00\x00\x00\x40\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x40\x00\x38\x00\x02\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x05\x00\x00\x00\xb0\x00\x00\x00\x00\x00\x00\x00\xb0\x00\x40\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x2e\x00\x00\x00\x00\x00\x00\x00\x2e\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x04\x00\x00\x00\xde\x00\x00\x00\x00\x00\x00\x00\xde\x00\x41\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x0c\x00\x00\x00\x00\x00\x00\x00\x0c\x00\x00\x00\x00\x00\x00\x00\x00\x10\x00\x00\x00\x00\x00\x00\x48\xc7\xc0\x01\x00\x00\x00\x48\xc7\xc7\x01\x00\x00\x00\x48\xc7\xc6\xde\x00\x41\x00\x48\xc7\xc2\x0c\x00\x00\x00\x0f\x05\x48\xc7\xc0\x3c\x00\x00\x00\x48\xc7\xc7\x00\x00\x00\x00\x0f\x05\x48\x65\x6c\x6c\x6f\x2c\x20\x4d\x6f\x6d\x21\x00" > world
@@ -576,7 +576,7 @@ chmod +x world
 
 ![A screenshot displaying success execution of a handcrafted ELF Executable Program File](image-44.png)
 
-### Reference
+## Reference
 
 *   [https://wiki.osdev.org/ELF](https://wiki.osdev.org/ELF)
 *   [https://refspecs.linuxfoundation.org/elf/elf.pdf](https://refspecs.linuxfoundation.org/elf/elf.pdf)

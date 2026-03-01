@@ -17,7 +17,7 @@ The way I solved this challenge turns out to be _unintended_, so if you are look
 
 ![This image contains challenge information](image-2.png)
 
-### General Inspection
+## General Inspection
 
 We begin by inspecting what we’ve been given in the `challenge` `handout`. We are provided with two files `./chall` and `./libc.so`. Let’s gather some information about these two files by using `checksec` which will tell us about `protections` applied on these binaries. By knowing which `protections` are applied, we can better guide ourselves in narrowing down vulnerabilities that we are expecting to be needed in-order to obtain control.
 
@@ -35,7 +35,7 @@ From above, we notice something interesting. This is not our typical `glibc` `lo
 
 ![This image contains snapshot from the page at https://musl.libc.org](image-6.png)
 
-### Interactive Understanding
+## Interactive Understanding
 
 Let’s run the binary and try to poke around it, observe its `input` and `output`. In that way, we might be able to have an idea in the back of our head as to “_what to look for_” when we see the de-compilation of the binary and try to understand how it works.
 
@@ -45,7 +45,7 @@ And as the tradition goes, we have to spam bunch of `"A"` in the `input` and see
 
 ![This GIF shows when we enter bunch of “A”s then application starts looping infinitely while printing message “You aren’t D3rdlord3”.](image-8.gif)
 
-### Primitives and Limitations
+## Primitives and Limitations
 
 Let us now focus on going through the `de-compilation` of the binary to inspect the anomaly that we found earlier and see what vulnerabilities lurks in it.
 
@@ -207,7 +207,7 @@ To obtain _memory overwrite_ via `Format string`, we can use `%hn` specifier to 
 
 `Format String Exploits` in itself is a complicated subject in `Binary Exploitation`, please refer to other resources if you are unable to understand why we are doing this or how is this even possible.
 
-### Exploiting Format String
+## Exploiting Format String
 
 Since we have `read` and `write` primitives via `Format String Vulnerability`. We can leak out `addresses` in memory which might lead us to be able to leak out addresses from `libc` or `stack`. With `libc` leak, we can calculate `addresses` of various functions available within `libc` and with `stack` leak, we can figure out the `address` of `saved instruction pointer` to overwrite and obtain control of the `binary`.
 
@@ -276,7 +276,7 @@ Another thing to note is that during our `debugging`, we found out that there wa
 
 ![This shows that at rsp+0x8, we have a tainted address i.e for some reason we cannot overwrite it properly](image-18.png)
 
-### Building a ROP chain
+## Building a ROP chain
 
 We want to be creatively lazy today, we will take the route of `ROP` chaining our way through. The idea is simple, use instructions from `libc` or `application` itself to build a meaningful functionality and for us that is to pop a `shell`.
 
@@ -396,7 +396,7 @@ Once we overwrite our stack, `2 bytes` at a time. We see our beautiful `ROP` cha
 
 ![After overwriting values in our stack, we see our ROP chain coming alive](image-25.png)
 
-### Triggering The Exploit
+## Triggering The Exploit
 
 Once we have our `ROP` chain ready on the `stack`, all we need to do is overwrite the `saved instruction pointer` with the `address` of a `POP RAX ; RET` gadget inside `chall` binary and so it will pop off the `tainted value` at `rax` register and then `ret` to `rsp+0x10` from where our `ROP` chain begins.
 
@@ -602,7 +602,7 @@ Below we see our exploit in action and we finally pop the `shell` —
 
 💗 We have successfully exploited `beating_yellow_king_with_musl_in_ng+` binary and thus completed the challenge — Happy hacking!
 
-### Afterwords
+## Afterwords
 
 Here’s another unintended solution that I found too cool , I mean awesome `pwners` are truly awesome right?
 

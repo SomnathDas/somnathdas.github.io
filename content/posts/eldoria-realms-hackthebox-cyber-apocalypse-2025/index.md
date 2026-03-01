@@ -15,7 +15,7 @@ Eldoria Realms is a “web exploitation” challenge featured in HTB’s Cyber A
 
 > **Note** — I’ve tried to incorporate my research on why our payload works and the conditions required for it to work. As a result, this write-up became quite lengthy. Feel free to skip to the **Exploitation** section of this article if you’re in a hurry.
 
-### Black-Box Review
+## Black-Box Review
 
 We’ve been provided with a copy of application’s source-code and immediately we want to jump to it and start reading it. However, a better approach would be to first navigate around the running instance of the application to get an overview of its functionalities which will make it easier for us to go through the source-code because we’d already be familiar with some of its exposed functions. Also make sure that you have your `Web-Proxy` turned on to capture requests that will be made so that you can analyze it later on.
 
@@ -77,7 +77,7 @@ Let’s recall everything that we’ve observed as we navigated around this appl
 2.  I might be able to change `item_id` to some `index` that might enable us to reference an `item` that could be interesting and hence an `IDOR` vulnerability.
 3.  If I can control `realm_url` then I will be able to let the `application` make `request` to a possibly `arbitrary` `uri` and hence obtaining a `SSRF` vulnerability and so I might need to find a way to control `realm_url`.
 
-### Source-Code Review
+## Source-Code Review
 
 Let’s start with the `project` `file` `structure`.
 
@@ -319,7 +319,7 @@ And what do we see? A `Command Injection Vulnerability` in `healthCheck()` `func
 
 Before we go any further, let me tell you that we will use `gopher` `protocol` to communicate with `gRPC Server` and send our `request` to execute `CheckHealth()` procedure. To explain why we can do this and how it even works, let’s cover some background.
 
-### Background — Gopher
+## Background — Gopher
 
 I’ll be directly quoting Gopher [RFC1436](https://datatracker.ietf.org/doc/html/rfc1436) and [RFC4266](https://datatracker.ietf.org/doc/html/rfc4266).
 
@@ -347,7 +347,7 @@ It’ll drop the **first character** i.e the `item-type` and send the rest i.e `
 
 > All intelligence is carried by the server implementation rather than the protocol. What you build into more exotic servers is up to you. Server implementations may grow as needs dictate and time allows.
 
-### Background — gRPC
+## Background — gRPC
 
 I’ll be quoting `go-gRPC` [documentation](https://grpc.io/docs/languages/go/basics/) and its [source-code](https://github.com/grpc/grpc-go).
 
@@ -450,7 +450,7 @@ So now we know how to communicate with `gRPC` using `curl` and that is using `HT
 
 > Now this might not be completely true but we’ve hypothesized pretty well at this point, let’s see how it turns out in practice — “An age old saying”
 
-### Some Gotchas
+## Some Gotchas
 
 Also observe that the version of `curl` that we’ve been provided with in `Dockerfile` does not support `http/2`.
 
@@ -464,7 +464,7 @@ _Also_ notice that `curl` won’t allow `NULL-BYTES` to be processed in our `gop
 
 **In any case, now we need to construct a valid** `HTTP/2` **request packet for** `gRPC` **and send it through** `curl` **using** `gopher://` **protocol.**
 
-### Exploitation
+## Exploitation
 
 *   Construct a valid `HTTP/2` request packet that will execute `CheckHealth()` procedure.
 *   By intercepting the communication between `go-gRPC-server` and `ruby-app` using `Wireshark`.
@@ -560,7 +560,7 @@ And moment of truth —
 
 🧡 We have successfully pwned `Eldoria Realms` web app and thus completed the challenge — Happy Hacking!
 
-### References
+## References
 
 1.  [https://blog.doyensec.com/2024/10/02/class-pollution-ruby.html](https://blog.doyensec.com/2024/10/02/class-pollution-ruby.html)
 2.  [https://datatracker.ietf.org/doc/html/rfc1436](https://datatracker.ietf.org/doc/html/rfc1436)

@@ -15,7 +15,7 @@ Compress-a-thon is a “web exploitation” challenge that was featured in Penta
 
 ![A screenshot describing the challenge details.](image-2.png)
 
-### Black-Box Review
+## Black-Box Review
 
 To begin our testing, it is always a good idea to look at the application as a “user” and go over its functionalities while having the brain of a “tester” to notice the details behind its functionalities as we go along-the-way.
 
@@ -159,7 +159,7 @@ Summing what we’ve discovered so far and thus what to work on —
 *   `Submit` button triggers our `html-input` to be minified and then submit to `/render` endpoint and we are not so sure about `Share` button but it sends our `html-input` to `/share` endpoint.
 *   We have a `CSP` and a `HTML` sanitzation to bypass in-order to realize `XSS`.
 
-### Source-Code Review
+## Source-Code Review
 
 Here are our project files —
 
@@ -298,7 +298,7 @@ And I’ve added a `console.log()` for `html.slice(length)` and we can see that 
 
 Therefore, we’ve also bypassed `sanitizeHtml()` function and all we now need to do is `pad` `HTML Comment` in our `html-input` with `newlines` just enough for our `actual XSS injection` to pass un-sanitized.
 
-### A Few Closures
+## A Few Closures
 
 Before moving to exploitation, let’s take a look at `bot.js` to wrap it up.
 
@@ -369,7 +369,7 @@ app.post("/render", (req, res) => {
 
 We can see from where `escapedHtml` flows into `res.render()` function and since we’ve bypassed the `escapeHtml()` function combined with the way it is being injected into `.ejs` template and thus making it vulnerable to `XSS`.
 
-### Exploitation
+## Exploitation
 
 Our `CSP Bypass XSS Payload` —
 
@@ -400,11 +400,11 @@ About 381 Newlines or so
 
 💜 We have successfully exploited `Compress-a-thon` web app and thus completed the challenge — Happy Hacking!
 
-### Afterwords
+## Afterwords
 
 🥰 Our team was proud to solve this challenge given to us in the 2nd stage of Pentathon 2025, first because it was categorized as `Hard` difficulty, and second because only the top three teams before us had managed to solve it.
 
-### References
+## References
 
 1.  [https://aszx87410.github.io/beyond-xss/en/ch2/csp-bypass/#bypass-via-redirection](https://aszx87410.github.io/beyond-xss/en/ch2/csp-bypass/#bypass-via-redirection)
 2.  [https://w3c.github.io/webappsec-csp/#source-list-paths-and-redirects](https://w3c.github.io/webappsec-csp/#source-list-paths-and-redirects)
